@@ -51,17 +51,26 @@ function updateImgAndText(index) {
   });
 }
 
+dots.forEach((dot, i) => {
+  dot.addEventListener("click", () => {
+    currentIndex = i;
+    updateBullet(currentIndex);
+		updateImgAndText(currentIndex);
+  });
+});
+
 rightArrow.addEventListener("click", () => {
   nextSlide();
   updateBullet(currentIndex);
-	updateImgAndText(currentIndex);
+  updateImgAndText(currentIndex);
 });
 
 leftArrow.addEventListener("click", () => {
   previousSlide();
   updateBullet(currentIndex);
-	updateImgAndText(currentIndex);
+  updateImgAndText(currentIndex);
 });
 
 // console.log(bannerImg.src);
 // console.log(bannerTxt.innerHTML);
+console.log(currentIndex);
