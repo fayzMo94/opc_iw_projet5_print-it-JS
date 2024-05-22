@@ -26,6 +26,18 @@ const bannerTxt = document.querySelector("#banner p");
 let currentIndex = 0;
 
 // functions
+rightArrow.addEventListener("click", () => {
+  nextSlide();
+  updateBullet(currentIndex);
+  updateImgAndText(currentIndex);
+});
+
+leftArrow.addEventListener("click", () => {
+  previousSlide();
+  updateBullet(currentIndex);
+  updateImgAndText(currentIndex);
+});
+
 function nextSlide() {
   currentIndex = (currentIndex + 1) % slides.length;
 }
@@ -55,22 +67,6 @@ dots.forEach((dot, i) => {
   dot.addEventListener("click", () => {
     currentIndex = i;
     updateBullet(currentIndex);
-		updateImgAndText(currentIndex);
+    updateImgAndText(currentIndex);
   });
 });
-
-rightArrow.addEventListener("click", () => {
-  nextSlide();
-  updateBullet(currentIndex);
-  updateImgAndText(currentIndex);
-});
-
-leftArrow.addEventListener("click", () => {
-  previousSlide();
-  updateBullet(currentIndex);
-  updateImgAndText(currentIndex);
-});
-
-// console.log(bannerImg.src);
-// console.log(bannerTxt.innerHTML);
-console.log(currentIndex);
