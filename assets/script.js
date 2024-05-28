@@ -25,48 +25,33 @@ const bannerImg = document.querySelector(".banner-img");
 const bannerTxt = document.querySelector("#banner p");
 let currentIndex = 0;
 
-// functions
+//update slide
+function updateSlide() {
+  bannerImg.src = `./assets/images/slideshow/${slides[currentIndex].image}`;
+  bannerTxt.innerHTML = slides[currentIndex].tagLine;
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("dot_selected", i === currentIndex);
+  });
+}
+
+// event listener
 rightArrow.addEventListener("click", () => {
-  nextSlide();
-  updateBullet(currentIndex);
-  updateImgAndText(currentIndex);
+  currentIndex = (currentIndex + 1) % slides.length;
+  updateSlide();
 });
 
 leftArrow.addEventListener("click", () => {
-  previousSlide();
-  updateBullet(currentIndex);
-  updateImgAndText(currentIndex);
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  updateSlide();
 });
 
-function nextSlide() {
-  currentIndex = (currentIndex + 1) % slides.length;
-}
-function previousSlide() {
-  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-}
-
-function updateBullet(index) {
-  dots.forEach((dot, i) => {
-    if (i === index) {
-      dot.classList.add("dot_selected");
-    } else {
-      dot.classList.remove("dot_selected");
-    }
-  });
-}
-function updateImgAndText(index) {
-  slides.forEach((slide, i) => {
-    if (i === index) {
-      bannerImg.src = `./assets/images/slideshow/${slide.image}`;
-      bannerTxt.innerHTML = `${slide.tagLine}`;
-    }
-  });
-}
-
+// Event listeners for dots
 dots.forEach((dot, i) => {
   dot.addEventListener("click", () => {
     currentIndex = i;
-    updateBullet(currentIndex);
-    updateImgAndText(currentIndex);
+    updateSlide();
   });
 });
+
+// initialisation
+updateSlide();
